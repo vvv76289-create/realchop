@@ -1,0 +1,21 @@
+package com.realchop;
+
+import com.mojang.logging.LogUtils;
+import com.realchop.net.ChopNetwork;
+import net.neoforged.bus.api.IEventBus;
+import net.neoforged.fml.ModContainer;
+import net.neoforged.fml.common.Mod;
+import net.neoforged.fml.config.ModConfig;
+import org.slf4j.Logger;
+
+@Mod(RealChop.MODID)
+public class RealChop {
+    public static final String MODID = "realchop";
+    public static final Logger LOGGER = LogUtils.getLogger();
+
+    public RealChop(IEventBus modBus, ModContainer container) {
+        container.registerConfig(ModConfig.Type.COMMON, ChopConfig.SPEC);
+        modBus.addListener(ChopNetwork::register);
+        LOGGER.info("[RealChop] loaded");
+    }
+}
